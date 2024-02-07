@@ -33,6 +33,6 @@ public class JobController {
 
         jobs.add(job);
 
-        return "Job is added successfully";
+        return "Job is added ! ";
     }
 }
