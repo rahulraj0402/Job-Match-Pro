@@ -3,8 +3,8 @@ package com.rahul.JobMatchPro.job;
 
 import lombok.*;
 
-
-
+@EqualsAndHashCode
+@NoArgsConstructor
 @AllArgsConstructor
 @Setter
 @Getter
