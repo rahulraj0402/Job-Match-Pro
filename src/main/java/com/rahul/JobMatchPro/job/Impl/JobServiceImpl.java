@@ -4,10 +4,7 @@ import com.rahul.JobMatchPro.job.Job;
 import com.rahul.JobMatchPro.job.JobService;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 
 @Service
@@ -39,6 +36,20 @@ public class JobServiceImpl implements JobService {
         }
 
         return null;
+    }
+
+    @Override
+    public boolean deleteById(long id) {
+        Iterator<Job> iterator = jobs.iterator();
+        while (iterator.hasNext()) {
+            Job job = iterator.next();
+            if (job.getId() == id) {
+                iterator.remove(); // Remove the job from the collection
+                return true;
+
+            }
+        }
+        return false;
     }
 
 

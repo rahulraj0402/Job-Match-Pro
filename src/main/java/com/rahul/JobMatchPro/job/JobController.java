@@ -3,10 +3,13 @@ package com.rahul.JobMatchPro.job;
 
 import com.rahul.JobMatchPro.job.Impl.JobServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
 import java.util.ArrayList;
+import java.util.IllegalFormatCodePointException;
 import java.util.List;
 
 
@@ -25,27 +28,42 @@ public class JobController {
 
     // end point for returning all the jobs available
     @GetMapping("/jobs")
-    public List<Job> findAall(){
+    public ResponseEntity<List<Job>> findAall(){
 
-        return jobService.findAll();
+        return new ResponseEntity<>(jobService.findAll() , HttpStatus.CREATED);
     }
 
 
     //  for posting the jobs
     @PostMapping("/jobs")
-    public String createJob(@RequestBody Job job){
+    public ResponseEntity<String> createJob(@RequestBody Job job){
 
        jobService.createJob(job);
 
-        return "Job is added !  ";
+        return new ResponseEntity<>("added successfully !! " ,HttpStatus.CREATED);
     }
 
     @GetMapping("/jobs/{id}")
-    public Job getJobById(@PathVariable long id){
+    public ResponseEntity<Job> getJobById(@PathVariable long id){
+
         Job job = jobService.getJobByJobId(id);
         if (job != null){
-            return job;
+            return new ResponseEntity<>(job , HttpStatus.OK);
         }
-        return new Job(1L , "Test" , "Test" , "Test" ,"Test" , "Test");
+
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+
+    @DeleteMapping("/jobs/{id}")
+    public ResponseEntity<String> deleteJobById(@PathVariable long id){
+
+      if (jobService.deleteById(id)){
+          return new ResponseEntity<>("deleted " , HttpStatus.OK);
+      }
+
+      return new ResponseEntity<>("Id entered is not found" , HttpStatus.NOT_FOUND);
+
+
     }
 }
