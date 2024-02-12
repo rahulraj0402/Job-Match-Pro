@@ -3,6 +3,7 @@ package com.rahul.JobMatchPro.job.Impl;
 import com.rahul.JobMatchPro.job.Job;
 import com.rahul.JobMatchPro.job.JobRepository;
 import com.rahul.JobMatchPro.job.JobService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -13,6 +14,7 @@ public class JobServiceImpl implements JobService {
 
    // private List<Job> jobs = new ArrayList<>();
 
+    @Autowired
     JobRepository jobRepository;
 
     private long nextId  = 1L ;
