@@ -6,7 +6,9 @@ public interface JobService {
     List<Job> findAll();
     void createJob(Job job);
 
-    Job getJobByJobId(long id);
+    Job getJobByJobId(Long id);
 
-    boolean deleteById(long id);
+    boolean deleteById(Long id);
+
+    boolean updateJob(Long id, Job updatedJob);
 }
