@@ -16,14 +16,27 @@ public class CompanyController {
     }
 
     @GetMapping
-    public List<Company> getAllCompanies(){
-        return companyService.getAllCompanies();
+    public ResponseEntity<List<Company>> getAllCompanies(){
+         List<Company> list =companyService.getAllCompanies();
+         return new ResponseEntity<>(list , HttpStatus.OK);
+
     }
 
-    @PutMapping
+    @PutMapping("/{id}")
     public ResponseEntity<String> updateCompany(@PathVariable Long id , @RequestBody Company company){
 
+        boolean updated = companyService.updateCompany(company , id);
+        if (updated){
+            return new ResponseEntity<>("Updated" , HttpStatus.OK);
+        }
         return new ResponseEntity<>("The id you have entered is not fount" , HttpStatus.NOT_FOUND);
+    }
+
+    @PostMapping
+    public ResponseEntity<String> createCompany(@RequestBody Company company){
+
+        companyService.createCompany(company);
+        return new ResponseEntity<>("Company added" , HttpStatus.CREATED);
     }
 
 
