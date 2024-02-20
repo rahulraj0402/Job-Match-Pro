@@ -7,6 +7,7 @@ import com.rahul.JobMatchPro.job.Job;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -48,4 +49,32 @@ public class CompanyServiceImpl implements CompanyService {
     public void createCompany(Company company) {
       companyRepository.save(company);
     }
+
+    @Override
+    public Company getCompanyById(Long id) {
+
+        return companyRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public boolean deleteCompanyById(Long id) {
+        Optional<Company> companyOptional = companyRepository.findById(id);
+        if (companyOptional.isPresent()){
+            try {
+                companyRepository.deleteById(id);
+                return true;
+            }catch (Exception e){
+                return false;
+            }
+        }else {
+            return false;
+        }
+    }
+
+    @Override
+    public List<Company> findByName(String name) {
+        return companyRepository.findByName(name);
+    }
+
+
 }

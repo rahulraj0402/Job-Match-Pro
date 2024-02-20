@@ -1,10 +1,14 @@
 package com.rahul.JobMatchPro.company;
 
+import org.apache.el.lang.ELArithmetic;
+import org.springframework.boot.autoconfigure.graphql.GraphQlProperties;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("companies")
@@ -18,7 +22,11 @@ public class CompanyController {
     @GetMapping
     public ResponseEntity<List<Company>> getAllCompanies(){
          List<Company> list =companyService.getAllCompanies();
-         return new ResponseEntity<>(list , HttpStatus.OK);
+         if (!list.isEmpty()){
+             return new ResponseEntity<>(list , HttpStatus.OK);
+         }else {
+             return new  ResponseEntity<>(HttpStatus.NOT_FOUND);
+         }
 
     }
 
@@ -39,6 +47,36 @@ public class CompanyController {
         return new ResponseEntity<>("Company added" , HttpStatus.CREATED);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Company> getCompanyById(@PathVariable Long id){
+      Company company = companyService.getCompanyById(id);
+      if (company != null){
+          return new ResponseEntity<>(company , HttpStatus.OK);
+      }else{
+          return new ResponseEntity<>( HttpStatus.NOT_FOUND);
+      }
+
+    }
+
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteCompanyById(@PathVariable Long id){
+        boolean isDeleted = companyService.deleteCompanyById(id);
+        if (isDeleted){
+            return new ResponseEntity<>("Company Deleted", HttpStatus.OK);
+        }else{
+            return new ResponseEntity<>("Company not found" , HttpStatus.NOT_FOUND);
+        }
+    }
+
+
+//    @GetMapping("/{name}")
+//    public ResponseEntity<List<Company>> findByName(@PathVariable String name){
+//        List<Company> companies = companyService.findByName(name);
+//        if (companies != null){
+//            return //   make this function 5 : 04
+//        }
+//    }
 
 
 
