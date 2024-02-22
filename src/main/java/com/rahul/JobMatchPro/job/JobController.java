@@ -1,4 +1,5 @@
 package com.rahul.JobMatchPro.job;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -9,6 +10,7 @@ import java.util.List;
 @RequestMapping("/jobs")
 public class JobController {
 
+    @Autowired
     private JobService jobService;
     public JobController(JobService jobService) {
         this.jobService = jobService;

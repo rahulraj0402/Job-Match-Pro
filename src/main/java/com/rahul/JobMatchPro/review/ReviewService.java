@@ -7,5 +7,6 @@ import java.util.List;
 public interface ReviewService {
 
     List<Review> getAllReview(Long companyId);
+    boolean addReview(Long companyId , Review review );
 
 }
