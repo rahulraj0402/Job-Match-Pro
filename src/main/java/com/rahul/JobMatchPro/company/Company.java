@@ -1,6 +1,5 @@
 package com.rahul.JobMatchPro.company;
-
-
+import com.rahul.JobMatchPro.review.Review;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.rahul.JobMatchPro.job.Job;
 import jakarta.persistence.*;
@@ -26,7 +25,11 @@ public class Company {
     @OneToMany(mappedBy = "company")
     private List<Job> jobs ;
 
-//    private List<Reviews> reviews ;
+
+    @OneToMany(mappedBy = "company")
+    private List<Review> reviews ;
 
 
 }
+
+// 5:19 can cause problem
