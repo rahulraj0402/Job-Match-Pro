@@ -8,7 +8,6 @@ public class JobMatchProApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(JobMatchProApplication.class, args);
-
 	}
 
 }

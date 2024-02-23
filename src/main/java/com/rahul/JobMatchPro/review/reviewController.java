@@ -40,8 +40,16 @@ public class reviewController {
     }
 
     @GetMapping("/reviews/{reviewId}")
-    public ResponseEntity<Review> getReviewById(@PathVariable Long reviewId ){
+    public ResponseEntity<Review> getReviewById(@PathVariable Long companyId ,
+                                                @PathVariable Long reviewId ){
+        return new ResponseEntity<>(reviewService.getReview(companyId , reviewId) , HttpStatus.OK);
+    }
 
+    @PutMapping("/reviews/{reviewId}")
+    public ResponseEntity<String> updateReview(@PathVariable Long companyId ,
+                                               @PathVariable Long reviewId ,
+                                               @RequestBody Review review){
+        return new ResponseEntity<>("Review Updated" , HttpStatus.OK);
     }
 
 
