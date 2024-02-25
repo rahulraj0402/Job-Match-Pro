@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @AllArgsConstructor
@@ -49,10 +48,26 @@ public class reviewController {
     public ResponseEntity<String> updateReview(@PathVariable Long companyId ,
                                                @PathVariable Long reviewId ,
                                                @RequestBody Review review){
-        return new ResponseEntity<>("Review Updated" , HttpStatus.OK);
+       boolean isUpdated = reviewService.updateReview(companyId , reviewId , review);
+
+       if (isUpdated){
+           return new ResponseEntity<>("Updated successfully !! " , HttpStatus.OK);
+       }
+       return new ResponseEntity<>("Not Updated " , HttpStatus.NOT_FOUND);
     }
 
 
+    @DeleteMapping("/reviews/{reviewId}")
+    public ResponseEntity<String> deleteReview(@PathVariable Long companyId ,
+                                                 @PathVariable Long reviewId){
+
+        boolean isDeleted = reviewService.deleteReview(companyId , reviewId);
+        if (isDeleted){
+            return new ResponseEntity<>("deleted  successfully !! " , HttpStatus.OK);
+        }
+        return new ResponseEntity<>("Not deleted !!  " , HttpStatus.NOT_FOUND);
+
+    }
 
 
 }
