@@ -29,8 +29,6 @@ Job Match Pro is a job application system designed to match job seekers with rel
 
 ## Setup
 1. **Clone the Repository**: Clone the Job Match Pro repository to your local machine.
-   git clone https://github.com/rahulraj0402/Job-Match-Pro.git
 
-2.  **Build Docker Containers**: Navigate to the project directory and build the Docker containers.
 
   
